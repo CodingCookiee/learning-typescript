@@ -12,11 +12,11 @@ export default function LearnPage() {
     { id: 3, title: "Master advanced types", completed: true },
   ];
 
-  const products = [
-    { id: "p1", name: "TypeScript Course", price: 49.99 },
-    { id: "p2", name: "React Handbook", price: 29.99 },
-    { id: "p3", name: "Node.js Guide", price: 39.99 },
-  ];
+ const products = [
+  { id: 1, name: "TypeScript Course", price: 49.99 },
+  { id: 2, name: "React Handbook", price: 29.99 },
+  { id: 3, name: "Node.js Guide", price: 39.99 },
+];
 
   const users = [
     { name: "Alice", role: "Developer" },
