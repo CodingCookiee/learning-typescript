@@ -17,3 +17,5 @@ const result2 = goodFunction([1, 2, 3]);
 // result2.toUpperCase(); // ❌ TypeScript catches this error!
 
 console.log("Generic result:", result2);
+
+// ? Key difference: any = "I don't care about types" vs <T> = "I care about types, but let the caller decide"
