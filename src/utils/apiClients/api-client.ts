@@ -1,4 +1,10 @@
-import { ApiResponse, User, Post, ApiError, LoadingState } from "@/utils/api-types";
+import {
+  ApiResponse,
+  User,
+  Post,
+  ApiError,
+  LoadingState,
+} from "@/utils/api-types";
 
 async function fetchApi<T>(url: string): Promise<T> {
   try {
@@ -36,4 +42,14 @@ export async function fetchUserPosts(userId: number): Promise<Post[]> {
 
 export async function fetchPost(id: number): Promise<Post> {
   return fetchApi<Post>(`https://jsonplaceholder.typicode.com/posts/${id}`);
+}
+
+export async function fetchPostComments(postId: number): Promise<Comment[]> {
+  return fetchApi<Comment[]>(
+    `https://jsonplaceholder.typicode.com/posts/${postId}/comments`
+  );
+}
+
+export async function fetchTodos(): Promise<Todo[]> {
+  return fetchApi<Todo[]>(`https://jsonplaceholder.typicode.com/todos`);
 }

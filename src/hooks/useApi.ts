@@ -59,3 +59,13 @@ export function usePosts() {
   const { fetchPosts } = require("@/utils/apiClients/api-client");
   return useApi(fetchPosts, []);
 }
+
+export function useComments(postId: number) {
+  const { fetchPostComments } = require("@/utils/apiClients/api-client");
+  return useApi(() => fetchPostComments(postId), [postId]);
+}
+
+export function useTodos() {
+  const { fetchTodos } = require("@/utils/apiClients/api-client");
+  return useApi(fetchTodos, []);
+}

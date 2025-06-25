@@ -28,6 +28,21 @@ export type Post = {
   body: string;
 };
 
+export type Comment = {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+};
+
+export type Todo = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+};
+
 // API Error type
 export type ApiError = {
   message: string;

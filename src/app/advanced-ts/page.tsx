@@ -3,9 +3,13 @@
 import { useState } from "react";
 import UserCard from "@/components/ui/client/UserCard";
 import UsersList from "@/components/ui/client/UsersList";
+import PostsList from "@/components/ui/client/PostList";
+import TodosList from "@/components/ui/client/TodosList";
 
-export default function LearnPage() {
-  const [activeTab, setActiveTab] = useState<"basics" | "api">("basics");
+export default function AdvancedTsPage() {
+  const [activeTab, setActiveTab] = useState<
+    "basics" | "userList" | "postsList" | "todosList"
+  >("basics");
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
@@ -26,14 +30,34 @@ export default function LearnPage() {
           Basics Review
         </button>
         <button
-          onClick={() => setActiveTab("api")}
+          onClick={() => setActiveTab("userList")}
           className={`pb-2 px-1 ${
-            activeTab === "api"
+            activeTab === "userList"
               ? "border-b-2 border-blue-500 text-blue-600"
               : "text-gray-500"
           }`}
         >
-          API Integration
+          User List
+        </button>
+        <button
+          onClick={() => setActiveTab("postsList")}
+          className={`pb-2 px-1 ${
+            activeTab === "postsList"
+              ? "border-b-2 border-blue-500 text-blue-600"
+              : "text-gray-500"
+          }`}
+        >
+          Posts List
+        </button>
+        <button
+          onClick={() => setActiveTab("todosList")}
+          className={`pb-2 px-1 ${
+            activeTab === "todosList"
+              ? "border-b-2 border-blue-500 text-blue-600"
+              : "text-gray-500"
+          }`}
+        >
+          Todos List
         </button>
       </div>
 
@@ -51,12 +75,24 @@ export default function LearnPage() {
         </div>
       )}
 
-      {activeTab === "api" && (
+      {activeTab === "userList" && (
         <div className="space-y-6">
-          <h2 className="text-2xl font-semibold">
-            Live API Data with TypeScript
-          </h2>
+          <h2 className="text-2xl font-semibold">User List</h2>
           <UsersList />
+        </div>
+      )}
+
+      {activeTab === "postsList" && (
+        <div className="space-y-6">
+          <h2 className="text-2xl font-semibold">Posts List</h2>
+          <PostsList />
+        </div>
+      )}
+
+      {activeTab === "todosList" && (
+        <div className="space-y-6">
+          <h2 className="text-2xl font-semibold">Todo List</h2>
+          <TodosList />
         </div>
       )}
     </div>
