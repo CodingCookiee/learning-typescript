@@ -5,10 +5,11 @@ import UserCard from "@/components/ui/client/UserCard";
 import UsersList from "@/components/ui/client/UsersList";
 import PostsList from "@/components/ui/client/PostList";
 import TodosList from "@/components/ui/client/TodosList";
+import PaginatedPosts from "@/components/ui/client/PaginatedPosts";
 
 export default function AdvancedTsPage() {
   const [activeTab, setActiveTab] = useState<
-    "basics" | "userList" | "postsList" | "todosList"
+    "basics" | "userList" | "postsList" | "todosList" | "paginatedPosts"
   >("basics");
 
   return (
@@ -59,6 +60,17 @@ export default function AdvancedTsPage() {
         >
           Todos List
         </button>
+
+        <button
+          onClick={() => setActiveTab("paginatedPosts")}
+          className={`pb-2 px-1 ${
+            activeTab === "paginatedPosts"
+              ? "border-b-2 border-blue-500 text-blue-600"
+              : "text-gray-500"
+          }`}
+        >
+          Paginated Posts
+        </button>
       </div>
 
       {/* Tab Content */}
@@ -93,6 +105,13 @@ export default function AdvancedTsPage() {
         <div className="space-y-6">
           <h2 className="text-2xl font-semibold">Todo List</h2>
           <TodosList />
+        </div>
+      )}
+
+      {activeTab === "paginatedPosts" && (
+        <div className="space-y-6">
+          <h2 className="text-2xl font-semibold">Paginated Posts</h2>
+          <PaginatedPosts />
         </div>
       )}
     </div>

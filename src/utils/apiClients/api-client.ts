@@ -6,7 +6,7 @@ import {
   LoadingState,
 } from "@/utils/api-types";
 
-async function fetchApi<T>(url: string): Promise<T> {
+export async function fetchApi<T>(url: string): Promise<T> {
   try {
     const response = await fetch(url);
 

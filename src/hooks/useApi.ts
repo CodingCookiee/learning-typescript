@@ -11,6 +11,7 @@ export function useApi<T>(
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<LoadingState>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [refetchTrigger, setRefetchTrigger] = useState(0);
 
   useEffect(() => {
     let isCancelled = false;
@@ -39,11 +40,11 @@ export function useApi<T>(
     return () => {
       isCancelled = true;
     };
-  }, dependencies);
+  }, [...dependencies, refetchTrigger]); 
 
   const refetch = () => {
     setLoading("idle");
-    // Trigger useEffect by updating dependencies
+    setRefetchTrigger((prev) => prev + 1);
   };
 
   return { data, loading, error, refetch };
