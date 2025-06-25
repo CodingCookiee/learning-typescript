@@ -1,6 +1,6 @@
 "use client";
 
-import { useTodos } from "@/hooks/useApi";
+import { useTodos, useEndpoint } from "@/hooks/useApi";
 import { Todo } from "@/utils/api-types";
 
 function LoadingSpinner() {
@@ -40,7 +40,8 @@ function TodoCard({ todo }): { todo: Todo } {
 }
 
 export default function TodoList() {
-  const { data: todos, loading, error, refetch } = useTodos();
+  // const { data: todos, loading, error, refetch } = useTodos();
+  const { data: todos, loading, error, refetch } = useEndpoint("todos");
 
   if (loading === "loading") {
     return <LoadingSpinner />;

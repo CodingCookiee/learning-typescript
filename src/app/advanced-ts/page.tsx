@@ -6,10 +6,16 @@ import UsersList from "@/components/ui/client/UsersList";
 import PostsList from "@/components/ui/client/PostList";
 import TodosList from "@/components/ui/client/TodosList";
 import PaginatedPosts from "@/components/ui/client/PaginatedPosts";
+import DynamicDataFetcher from "@/components/ui/client/DynamicDataFetcher";
 
 export default function AdvancedTsPage() {
   const [activeTab, setActiveTab] = useState<
-    "basics" | "userList" | "postsList" | "todosList" | "paginatedPosts"
+    | "basics"
+    | "userList"
+    | "postsList"
+    | "todosList"
+    | "paginatedPosts"
+    | "dynamic"
   >("basics");
 
   return (
@@ -62,6 +68,16 @@ export default function AdvancedTsPage() {
         </button>
 
         <button
+          onClick={() => setActiveTab("dynamic")}
+          className={`pb-2 px-1 ${
+            activeTab === "dynamic"
+              ? "border-b-2 border-blue-500 text-blue-600"
+              : "text-gray-500"
+          }`}
+        >
+          Dynamic Data Fetcher
+        </button>
+        <button
           onClick={() => setActiveTab("paginatedPosts")}
           className={`pb-2 px-1 ${
             activeTab === "paginatedPosts"
@@ -112,6 +128,13 @@ export default function AdvancedTsPage() {
         <div className="space-y-6">
           <h2 className="text-2xl font-semibold">Paginated Posts</h2>
           <PaginatedPosts />
+        </div>
+      )}
+
+      {activeTab === "dynamic" && (
+        <div className="space-y-6">
+          <h2 className="text-2xl font-semibold">Dynamic Data Fetcher</h2>
+          <DynamicDataFetcher />
         </div>
       )}
     </div>

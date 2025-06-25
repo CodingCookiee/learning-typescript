@@ -2,6 +2,7 @@
 
 import { useUsers } from "@/hooks/useApi";
 import { User } from "@/utils/api-types";
+import { useEndpoint } from "@/hooks/useApi";
 
 // Loading component
 function LoadingSpinner() {
@@ -49,8 +50,8 @@ function UserCard({ user }: { user: User }) {
 
 // Main component
 export default function UsersList() {
-  const { data: users, loading, error, refetch } = useUsers();
-
+  // const { data: users, loading, error, refetch } = useUsers();
+  const { data: users, loading, error, refetch } = useEndpoint("users");
   if (loading === "loading") {
     return <LoadingSpinner />;
   }

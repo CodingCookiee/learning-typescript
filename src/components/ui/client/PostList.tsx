@@ -1,7 +1,8 @@
 "use client";
 
-import { usePosts } from "@/hooks/useApi";
+import { usePosts, useEndpoint } from "@/hooks/useApi";
 import { Post } from "@/utils/api-types";
+
 
 function LoadingSpinner() {
   return (
@@ -36,7 +37,8 @@ function PostCard({ post }: { post: Post }) {
 }
 
 export default function PostsList() {
-  const { data: posts, loading, error, refetch } = usePosts();
+  // const { data: posts, loading, error, refetch } = usePosts();
+  const { data: posts, loading, error, refetch } = useEndpoint("posts");
 
   if (loading === "loading") {
     return <LoadingSpinner />;

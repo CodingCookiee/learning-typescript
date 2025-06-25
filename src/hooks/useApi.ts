@@ -2,8 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { LoadingState } from "@/utils/api-types";
+import { 
+  fetchFromEndpoint,
+  fetchUsers,
+  fetchPosts,
+  fetchComments,
+  fetchTodos,
+  fetchUserById,
+  fetchPostById,
+  fetchUserPosts,
+  fetchPostComments
+} from "@/utils/apiClients/api-client";
 
-// Generic hook for API calls
+// ✅ Generic hook for API calls
 export function useApi<T>(
   apiFunction: () => Promise<T>,
   dependencies: any[] = []
@@ -40,33 +51,52 @@ export function useApi<T>(
     return () => {
       isCancelled = true;
     };
-  }, [...dependencies, refetchTrigger]); 
+  }, [...dependencies, refetchTrigger]);
 
   const refetch = () => {
-    setLoading("idle");
     setRefetchTrigger((prev) => prev + 1);
   };
 
   return { data, loading, error, refetch };
 }
 
-// Specific hooks for our API
+// ✅ Advanced generic approach - ONE smart hook
+type ApiEndpoint = "users" | "posts" | "comments" | "todos";
+
+export function useEndpoint<T extends ApiEndpoint>(endpoint: T) {
+  return useApi(() => fetchFromEndpoint(endpoint), [endpoint]);
+}
+
+// ✅ Specific hooks using proper imports (no more require!)
 export function useUsers() {
-  const { fetchUsers } = require("@/utils/apiClients/api-client");
-  return useApi(fetchUsers, []);
+  return useApi(fetchUsers, []); 
 }
 
 export function usePosts() {
-  const { fetchPosts } = require("@/utils/apiClients/api-client");
-  return useApi(fetchPosts, []);
+  return useApi(fetchPosts, []); 
 }
 
-export function useComments(postId: number) {
-  const { fetchPostComments } = require("@/utils/apiClients/api-client");
-  return useApi(() => fetchPostComments(postId), [postId]);
+export function useComments() {
+  return useApi(fetchComments, []); 
 }
 
 export function useTodos() {
-  const { fetchTodos } = require("@/utils/apiClients/api-client");
-  return useApi(fetchTodos, []);
+  return useApi(fetchTodos, []); 
+}
+
+// ✅ Specific resource hooks
+export function useUser(id: number) {
+  return useApi(() => fetchUserById(id), [id]);
+}
+
+export function usePost(id: number) {
+  return useApi(() => fetchPostById(id), [id]);
+}
+
+export function useUserPosts(userId: number) {
+  return useApi(() => fetchUserPosts(userId), [userId]);
+}
+
+export function usePostComments(postId: number) {
+  return useApi(() => fetchPostComments(postId), [postId]);
 }
